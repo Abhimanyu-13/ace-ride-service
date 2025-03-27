@@ -280,55 +280,7 @@ $preference = $client_preference_detail;
    @endswitch
 </section>
 
-@if(count($banners))
 
-<section class="home-slider-wrapper py-sm-3 ">
-   <div class="container">
-      <div id="myCarousel" class="carousel slide al_desktop_banner" data-ride="carousel">
-         <div class="carousel-inner">
-            @foreach($banners as $key => $banner)
-            @php $url=''; if($banner->link=='category'){if(!empty($banner->category_slug)){$url=route('categoryDetail', $banner->category_slug);}}else if($banner->link=='vendor'){if(!empty($banner->vendor_slug)){$url=route('vendorDetail', $banner->vendor_slug);}}else if($banner->link=='url'){if($banner->link_url !=null){$url=$banner->link_url;}}@endphp
-            <div class="carousel-item @if($key == 0) active @endif">
-               <a class="banner-img-outer" href="{{$url??'#'}}" target="_blank">
-                  <link rel="preload" as="image" href="{{ get_file_path($banner->image,'IMG_URL1','1370','300') }}" />
-                  <img alt="" title="" class="blur-up lazyload w-100" data-src="{{ get_file_path($banner->image,'IMG_URL1','1370','300') }}" >
-               </a>
-            </div>
-            @endforeach
-         </div>
-         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-         <span class="sr-only">{{__('Previous')}}</span>
-         </a>
-         <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-         <span class="sr-only">{{__('Next')}}</span>
-         </a>
-      </div>
-      <div id="myMobileCarousel" class="carousel slide al_mobile_banner mb-2" data-ride="carousel" style="display:none;">
-         <div class="carousel-inner">
-            @foreach($mobile_banners as $key => $banner)
-            @php $url=''; if($banner->link=='category'){if(!empty($banner->category_slug)){$url=route('categoryDetail', $banner->category_slug);}}else if($banner->link=='vendor'){if(!empty($banner->vendor_slug)){$url=route('vendorDetail', $banner->vendor_slug);}}@endphp
-            <div class="carousel-item @if($key == 0) active @endif">
-               <a class="banner-img-outer" href="{{$url??'#'}}">
-                  <link rel="preload" as="image" href="{{ get_file_path($banner->image,'IMG_URL1','1370','300') }}" />
-                  <img alt="" title="" class="blur blurload w-100" data-src="{{ get_file_path($banner->image,'IMG_URL1','1370','300') }}" src="{{ get_file_path($banner->image,'IMG_URL1','137','30') }}">
-               </a>
-            </div>
-            @endforeach
-         </div>
-         <a class="carousel-control-prev" href="#myMobileCarousel" role="button" data-slide="prev">
-         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-         <span class="sr-only">{{__('Previous')}}</span>
-         </a>
-         <a class="carousel-control-next" href="#myMobileCarousel" role="button" data-slide="next">
-         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-         <span class="sr-only">{{__('Next')}}</span>
-         </a>
-      </div>
-   </div>
-</section>
-@endif
 
 
 <section class="section-b-space ratio_asos  pt-0 mt-0 pb-0 mt-0" id="our_vendor_main_div">
@@ -482,38 +434,7 @@ $preference = $client_preference_detail;
                     </div>
                 </div>
             </section>
-         @elseif($homePageLabel->slug == 'banner' && (count($homePageData['banners']) != 0))
-            @if(!empty(@$homePageData['banners'][$homePageLabel->translations->first()->cab_booking_layout_id]))
-               <section class="container mb-0 render_full_{{$homePageLabel->slug}}" id="{{$homePageLabel->slug.$key}}"  >
-                  <div class="top-heading d-flex justify-content-between">
-                     <h2 class="h2-heading"> @php
-                        echo (!empty($homePageLabel->translations->first()->title)) ? $homePageLabel->translations->first()->title : __($homePageLabel->title);
-                     @endphp </h2>
-                  </div>
-   
-                  <div class="custom_banner">
-                     <div class="container">
-                        <div class="text-center">
-                           @php
-                              $url = $homePageData['banners'][$homePageLabel->translations->first()->cab_booking_layout_id]; // replace with your URL
-                              $extension = pathinfo($url, PATHINFO_EXTENSION);
-                              $image_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp']; // list of image extensions
-                              $video_extensions = ['mp4', 'avi', 'mov', 'wmv']; // list of video extensions
-                           @endphp
-                           @if(in_array($extension, $image_extensions))
-                              <img alt="" title="" class="blur blurload w-100" data-src="{{$homePageData['banners'][$homePageLabel->translations->first()->cab_booking_layout_id]}}" src="{{$homePageData['banners'][$homePageLabel->translations->first()->cab_booking_layout_id]}}" height="300">	
-                           @elseif (in_array($extension, $video_extensions))
-                              <video id="video1" width="100%" controls autoplay muted>
-                                 <source data-src="{{$homePageData['banners'][$homePageLabel->translations->first()->cab_booking_layout_id]}}" src="{{$homePageData['banners'][$homePageLabel->translations->first()->cab_booking_layout_id]}}" type="video/mp4">
-                              </video>
-                           @else
-                           @endif
-                        </div>
-                     </div>
-                  </div>
-               </section>
-            @endif
-         @else
+ @else
             @if(!empty($homePageData[$homePageLabel->slug]) && count($homePageData[$homePageLabel->slug]) != 0)
                <section class="container mb-0 render_full_{{$homePageLabel->slug}}" id="{{$homePageLabel->slug.$key}}"  >
                   <div class="row" >
