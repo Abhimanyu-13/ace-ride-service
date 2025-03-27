@@ -108,7 +108,7 @@
                                                     <tr>
                                                         <th>{{ __('Date') }}</th>
                                                         <th>{{ __('Vendor') }}</th>
-                                                        <th>{{ _('Requested By') }}</th>
+                                                        <th>{{ __('Requested By') }}</th>
                                                         <th>{{ __('Amount') }}</th>
                                                         <th>{{ __('Payout Type') }}</th>
                                                         <th class="text-center">{{ __('Status') }}</th>
