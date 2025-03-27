@@ -1,0 +1,14 @@
+options:
+ max-time: 10
+pipelines:
+  branches:
+    master:
+     - step:
+         name: Deploy to server
+         script:
+           - echo "Deploying to Server"
+           - pipe: atlassian/ssh-run:0.4.0
+             variables:
+               SSH_USER: 'ubuntu'
+               SERVER: '52.13.132.239'
+               COMMAND: '/home/ubuntu/cicd-scripts/laundromat_backend.sh'
