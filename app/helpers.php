@@ -1407,22 +1407,22 @@ if (!function_exists('getServiceTypesCategory')) {
             $service_types = [];
 
             $alltypes = [
-                'delivery'     => ['products_service'],
-                'dine_in'      => ['products_service'],
-                'takeaway'     => ['products_service'],
-                'rental'       => ['rental_service'],
+                // 'delivery'     => ['products_service'],
+                // 'dine_in'      => ['products_service'],
+                // 'takeaway'     => ['products_service'],
+                // 'rental'       => ['rental_service'],
                 'pick_drop'    => ['pick_drop_service'],
-                'on_demand'    => ['on_demand_service'],
-                'laundry'      => ['laundry_service'],
-                'appointment'  => ['appointment_service'],
+                // 'on_demand'    => ['on_demand_service'],
+                // 'laundry'      => ['laundry_service'],
+                // 'appointment'  => ['appointment_service'],
                 'taxi'         => ['pick_drop_service'],
-                'p2p'          => ['p2p'],
-                'home_service' => ['on_demand_service', 'appointment_service'],
+                // 'p2p'          => ['p2p'],
+                // 'home_service' => ['on_demand_service', 'appointment_service'],
             ];
             
-            if ($vendorType == 'delivery' || $vendorType == 'dine_in' || $vendorType == 'takeaway' || $vendorType == 'rental' || $vendorType == 'pick_drop' || $vendorType == 'on_demand' || $vendorType == 'laundry' || $vendorType == 'appointment' || $vendorType == 'p2p') {
-                $service_types = $alltypes[$vendorType];
-            }
+            // if ($vendorType == 'delivery' || $vendorType == 'dine_in' || $vendorType == 'takeaway' || $vendorType == 'rental' || $vendorType == 'pick_drop' || $vendorType == 'on_demand' || $vendorType == 'laundry' || $vendorType == 'appointment' || $vendorType == 'p2p') {
+            //     $service_types = $alltypes[$vendorType];
+            // }
 
             if ($client_preference->business_type == 'taxi' || $client_preference->business_type == 'laundry' || $client_preference->business_type == 'home_service' || $client_preference->business_type == 'p2p') {
                 $service_types = $alltypes[$client_preference->business_type];

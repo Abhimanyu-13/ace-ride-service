@@ -64,21 +64,8 @@
             <div class="down-icon"> <i class="fa fa-angle-down" aria-hidden="true"></i> </div>
         </div>
         @endif
-        <div class="radius-bar d-xl-inline al_custom_search mr-sm-2">
-            <div class="search_form d-flex align-items-start justify-content-start"> <button
-                    class="btn"><i class="fa fa-search" aria-hidden="true"></i></button> @php
-                $searchPlaceholder=getNomenclatureName('Search', true);
-                $searchPlaceholder=($searchPlaceholder==='Search product, vendor, item') ?
-                __('Search product, vendor, item') : $searchPlaceholder; @endphp <input
-                    class="form-control border-0 typeahead" type="search"
-                    placeholder="{{$searchPlaceholder}}" id="main_search_box"
-                    autocomplete="off"> </div>
-            <div class="list-box style-4" style="display:none;" id="search_box_main_div"> </div>
-        </div>
-        @include('layouts.store.search_template')
-        @if(auth()->user() && $client_preference_detail->show_wishlist==1)
-        <div class="icon-nav mr-2 d-none d-sm-block"> <a class="fav-button" href="{{route('user.wishlists')}}"> <i class="fa fa-heart-o wishListCount" aria-hidden="true"></i> </a> </div>
-        @endif
+
+     
         <div class="icon-nav d-none d-sm-inline-block">
             <form name="filterData" id="filterData" action="{{route('changePrimaryData')}}">
                 @csrf <input type="hidden" id="cliLang" name="cliLang"
@@ -89,17 +76,8 @@
                             class="fa fa-search" aria-hidden="true"></i></span> </li>
                 <li class="onhover-div pl-0 shake-effect">
                     @if($client_preference_detail)
-                    @if($client_preference_detail->cart_enable==1)
-                    <a class="btn btn-solid_al d-flex align-items-center "
-                        href="{{route('showCart')}}">
-                        <i class="fa fa-shopping-cart mr-1 " aria-hidden="true"></i>
-                        <!-- <span>{{__('Cart')}}•</span> -->
-                        <span id="cart_qty_span"></span>
-                    </a> @endif @endif
-                    <script type="text/template" id="header_cart_template">
-                        <% _.each(cart_details.products, function(product, key){%> <% _.each(product.vendor_products, function(vendor_product, vp){%> <li id="cart_product_<%=vendor_product.id %>" data-qty="<%=vendor_product.quantity %>"> <a class='media' href='<%=show_cart_url %>'> <% if(vendor_product.pvariant.media_one){%> <img class='mr-2 blur blurload' data-src="<%=vendor_product.pvariant.media_one.pimage.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_one.pimage.image.path.image_path %>" src="<%=vendor_product.pvariant.media_one.pimage.image.path.proxy_url %>20/20<%=vendor_product.pvariant.media_one.pimage.image.path.image_path %>"> <%}else if(vendor_product.pvariant.media_second && vendor_product.pvariant.media_second.image != null){%> <img class='mr-2 blur blurload' data-src="<%=vendor_product.pvariant.media_second.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_second.image.path.image_path %>" src="<%=vendor_product.pvariant.media_second.image.path.proxy_url %>20/20<%=vendor_product.pvariant.media_second.image.path.image_path %>"> <%}else{%> <img class='mr-2 blur blurload' data-src="<%=vendor_product.image_url %>"> <%}%> <div class='media-body'> <h4><%=vendor_product.product.translation_one ? vendor_product.product.translation_one.title : vendor_product.product.sku %></h4> <h4> <span><%=vendor_product.quantity %> x <%=Helper.formatPrice(vendor_product.pvariant.price) %></span> </h4> </div></a> <div class='close-circle'> <a href="javascript::void(0);" data-product="<%=vendor_product.id %>" class='remove-product'> <i class='fa fa-times' aria-hidden='true'></i> </a> </div></li><%}); %> <%}); %> <li><div class='total'><h5>{{__('Subtotal')}}: <span id='totalCart'>{{Session::get('currencySymbol')}}<%=Helper.formatPrice(cart_details.gross_amount) %></span></h5></div></li><li><div class='buttons'><a href="<%=show_cart_url %>" class='view-cart'>{{__('View Cart')}}</a>
-                    </script>
-                    <ul class="show-div shopping-cart " id="header_cart_main_ul"></ul>
+                    
+                   
                 </li>
                 <li class="mobile-menu-btn d-none">
                     <div class="toggle-nav p-0 d-inline-block"><i
@@ -199,11 +177,7 @@
                             </div>
                             @include('layouts.store.search_template')
                             @if (auth()->user())
-                            @if ($client_preference_detail->show_wishlist == 1)
-                            <div class="icon-nav mx-2 d-none d-sm-block"> <a class="fav-button"
-                                    href="{{ route('user.wishlists') }}"> <i class="fa fa-heart-o wishListCount"
-                                        aria-hidden="true"></i> </a> </div>
-                            @endif
+                            
                             @endif
                             <div class="icon-nav d-none d-sm-inline-block">
                                 <form name="filterData" id="filterData"
@@ -218,22 +192,9 @@
                                                 aria-hidden="true"></i></span> </li>
                                     <li class="onhover-div pl-0 shake-effect">
                                         @if($client_preference_detail)
-                                        @if($client_preference_detail->cart_enable==1)
-                                        <a class="btn btn-solid_al d-flex align-items-center "
-                                            href="{{route('showCart')}}">
-                                            <i class="fa fa-shopping-cart mr-1 "
-                                                aria-hidden="true"></i>
-                                            <!-- <span>{{__('Cart')}}</span> -->
-                                            <span id="cart_qty_span">
-                                            </span>
-                                        </a>
+                                       
                                         @endif
-                                        @endif
-                                        <script type="text/template" id="header_cart_template">
-                                            <% _.each(cart_details.products, function(product, key){%> <% _.each(product.vendor_products, function(vendor_product, vp){%> <li id="cart_product_<%=vendor_product.id %>" data-qty="<%=vendor_product.quantity %>"> <a class='media' href='<%=show_cart_url %>'> <% if(vendor_product.pvariant.media_one){%> <img class='mr-2 blur blurload' data-src="<%=vendor_product.pvariant.media_one.pimage.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_one.pimage.image.path.image_path %>" src="<%=vendor_product.pvariant.media_one.pimage.image.path.proxy_url %>20/20<%=vendor_product.pvariant.media_one.pimage.image.path.image_path %>"> <%}else if(vendor_product.pvariant.media_second && vendor_product.pvariant.media_second.image != null){%> <img class='mr-2 blur blurload' data-src="<%=vendor_product.pvariant.media_second.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_second.image.path.image_path %>" src="<%=vendor_product.pvariant.media_second.image.path.proxy_url %>20/20<%=vendor_product.pvariant.media_second.image.path.image_path %>"> <%}else{%> <img class='mr-2 blur blurload' data-src="<%=vendor_product.image_url %>"> <%}%> <div class='media-body'> <h4><%=vendor_product.product.translation_one ? vendor_product.product.translation_one.title : vendor_product.product.sku %></h4> <h4> <span><%=vendor_product.quantity %> x <%=Helper.formatPrice(vendor_product.pvariant.price) %></span> </h4> </div></a> <div class='close-circle'> <a href="javascript::void(0);" data-product="<%=vendor_product.id %>" class='remove-product'> <i class='fa fa-times' aria-hidden='true'></i> </a> </div></li><%}); %> <%}); %> <li><div class='total'><h5>{{ __('Subtotal') }}: <span id='totalCart'>{{ Session::get('currencySymbol') }}<%=Helper.formatPrice(cart_details.gross_amount) %></span></h5></div></li><li><div class='buttons'><a href="<%=show_cart_url %>" class='view-cart'>{{ __('View Cart') }}</a>
-                                        </script>
-                                        <ul class="show-div shopping-cart "
-                                            id="header_cart_main_ul"></ul>
+                                      
                                     </li>
                                     <li class="mobile-menu-btn d-none">
                                         <div class="toggle-nav p-0 d-inline-block"><i
@@ -299,15 +260,7 @@
                                             @endif
                                         </div>
                                     </li>
-                                    <li class="onhover-div mobile-cart">
-                                        <a href="{{ route('showCart') }}"
-                                            style="position: relative"> <i
-                                                class="ti-shopping-cart"></i> <span
-                                                class="cart_qty_cls"
-                                                style="display:none"></span>
-                                        </a>{{-- <span class="cart_qty_cls" style="display:none"></span> --}}
-                                        <ul class="show-div shopping-cart"> </ul>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>

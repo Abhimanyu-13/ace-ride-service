@@ -49,15 +49,7 @@ $getAdditionalPreference = getAdditionalPreference(['is_phone_signup']);
                   </a>
                </li>
                @endif
-               @if($client_preference_detail->cart_enable == 1)
-               <li class="onhover-dropdown_al mobile-wishlist_al mobile-cart">
-                  <a href="{{route('showCart')}}" style="position: relative">
-                  {{__('Viewcart')}}
-                  <span class="cart_qty_cls" style="display:none"></span>
-                  </a>
-                  <ul class="show-div shopping-cart"></ul>
-               </li>
-               @endif
+
              
                @if($client_preference_detail->header_quick_link == 1)
                @foreach($pages as $page)
@@ -225,60 +217,7 @@ $getAdditionalPreference = getAdditionalPreference(['is_phone_signup']);
                      <!-- alUserIcon end -->
                      <!-- alShoppingBag start -->
                      @if($client_preference_detail)
-                     @if($client_preference_detail->cart_enable==1)
-                     <li class="alShoppingBag mx-md-4 mx-2 dropdown">
-                        <a class="alShopIcon" href="{{route('showCart')}}">
-                           <span class="navbar-tool-label bg-dark" id="cart_qty_span"> </span>
-                           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <g clip-path="url(#clip0_160_410)">
-                                 <path d="M16 4H14C14 1.79 12.21 0 10 0C7.79 0 6 1.79 6 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H16C17.1 20 18 19.1 18 18V6C18 4.9 17.1 4 16 4ZM10 2C11.1 2 12 2.9 12 4H8C8 2.9 8.9 2 10 2ZM16 18H4V6H6V8C6 8.55 6.45 9 7 9C7.55 9 8 8.55 8 8V6H12V8C12 8.55 12.45 9 13 9C13.55 9 14 8.55 14 8V6H16V18Z" fill="white"/>
-                              </g>
-                              <defs>
-                                 <clipPath id="clip0_160_410">
-                                    <rect width="20" height="20" fill="white"/>
-                                 </clipPath>
-                              </defs>
-                           </svg>
-                        </a>
-                        <script type="text/template" id="header_cart_template">
-                           <div class='alShoppingList'>
-                              <div class='widget widget-cart px-3 pt-2 pb-0' style="width: 20rem">
-                                 <div class='simplebar-wrapper' style="">
-                                       <div class='simplebar-content' style="padding: 0;">
-                                          <% _.each(cart_details.products, function(product, key){%> <% _.each(product.vendor_products, function(vendor_product, vp){%>
-                                          <li class='widget-cart-item pb-2 border-bottom' id="cart_product_<%=vendor_product.id %>" data-qty="<%=vendor_product.quantity %>">
-                                             <div class='close-circle btn-close'>
-                                                   <a href="javascript::void(0);" data-product="<%=vendor_product.id %>" class='remove-product text-danger'> <span aria-hidden="true">×</span></a>
-                                             </div>
-                                             <div class="d-flex align-items-center">
-                                                   <a class='media flex-shrink-0' href='<%=show_cart_url %>'> <% if(vendor_product.pvariant.media_one){%>
-                                                      <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.pvariant.media_one.pimage.image.path.proxy_url %>60/60<%=vendor_product.pvariant.media_one.pimage.image.path.image_path %>"> <%}
-                              else if(vendor_product.pvariant.media_second && vendor_product.pvariant.media_second.image != null){%>
-                                                      <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.pvariant.media_second.image.path.proxy_url %>60/60<%=vendor_product.pvariant.media_second.image.path.image_path %>"> <%}else{%>
-                                                      <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.image_url %>"> <%}%>
-                                                      <div class='media-body ps-2'>
-                                                         <h4 class='widget-product-title'><%=vendor_product.product.translation_one ? vendor_product.product.translation_one.title : vendor_product.product.sku %></h4>
-                                                         <h4 class='widget-product-meta'> <span class='text-muted'><%=vendor_product.quantity %> x <%=Helper.formatPrice(vendor_product.pvariant.price * vendor_product.pvariant.multiplier) %></span> </h4>
-                                                      </div>
-                                                   </a>
-                                             </div>
-                                          </li>
-                                          <%}); %> <%}); %>
-                                       </div>
-                                 </div>
-                                 <div class='d-flex flex-wrap justify-content-between align-items-center pt-3'>
-                                       <div class='total'>
-                                          <h5>{{__('Subtotal')}}: <span class='text-muted' id='totalCart'>{{Session::get('currencySymbol')}}<%=Helper.formatPrice(cart_details.gross_amount) %></span></h5>
-                                       </div>
-                                       <div class='buttons'><a href="<%=show_cart_url %>" class='view-cart'>{{__('View Cart')}}</a></div>
-                                 </div>
-                              </div>
-                           </div>
-                        </script>
-                        <ul class="show-div shopping-cart " id="header_cart_main_ul"></ul>
-                     </li>
-                     <!-- alShoppingBag end -->
-                     @endif @endif
+ @endif
                      <!-- alMenuIcon start -->
                      <li class="alMenuIcon">
                         <a href="#" class="alHamBurgerIcon">

@@ -92,47 +92,7 @@
                                     </a>
                                 </li>
                             @endif
-                            @if(@auth()->user()->can('order-view') || Auth::user()->is_superadmin == 1)
-                                <li>
-                                    <a href="{{route('order.index')}}">
-                                        <span class="icon-orders"></span>
-                                        @php
-                                        $vendormenu = getNomenclatureName('Orders', true);
-                                        $vendormenulabel = ($vendormenu=="Orders")?__('Orders'):__($vendormenu);
 
-                                         @endphp
-                                        <span> {{ __($vendormenulabel) }} </span>
-                                    </a>
-                                </li>
-
-                                {{-- <li>
-                                    <a href="#sidebarorders" data-toggle="collapse">
-                                    <span class="icon-accounting"></span>
-                                    @php
-                                        $vendormenu = getNomenclatureName('Orders', true);
-                                        $vendormenulabel = ($vendormenu=="Orders")?__('Orders'):__($vendormenu);
-
-                                    @endphp
-                                        <span> {{ __($vendormenulabel) }} </span>
-                                    </a>
-                                    <div class="collapse" id="sidebarorders">
-                                        <ul class="nav-second-level">
-
-                                                <li>
-                                                    <a href="{{route('order.index')}}">{{ __('All Orders') }}</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="{{route('backend.order.returns',['Pending'])}}">{{ __("Return Request") }}</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="{{route('cancel-order.requests')}}">{{ __("Cancel Order Request") }}</a>
-                                                </li>
-                                        </ul>
-                                    </div>
-                                </li> --}}
-                            @endif
                             @if(@auth()->user()->can('vendor-view') || Auth::user()->is_superadmin == 1)
                                 <li>
                                     <a href="{{route('vendor.index')}}">
@@ -184,21 +144,8 @@
                                     </a>
                                     <div class="collapse" id="sidebaraccounting">
                                         <ul class="nav-second-level">
-                                            @if(@auth()->user()->can('accounting-orders') || Auth::user()->is_superadmin == 1)
-                                                <li>
-                                                    <a href="{{route('account.orders')}}">{{ __('Orders') }}</a>
-                                                </li>
-                                            @endif
-                                            @if(@auth()->user()->can('accounting-loyalty-cards') || Auth::user()->is_superadmin == 1)
-                                                <li>
 
-                                                @php
-                                                    $loyaltyCards = getNomenclatureName('Loyalty Cards', true);
-                                                    $loyaltyCardsLabel = ($loyaltyCards=="Loyalty Cards")?__('Loyalty Cards'):$loyaltyCards;
-                                                @endphp
-                                                    <a href="{{route('account.loyalty')}}">{{ $loyaltyCardsLabel }}</a>
-                                                </li>
-                                            @endif
+
                                             @if(@auth()->user()->can('accounting-promo-codes') || Auth::user()->is_superadmin == 1)
                                                 <li>
                                                     <a href="{{route('account.promo.code')}}">{{ __('Promo Codes') }}</a>

@@ -293,23 +293,8 @@ if(session()->has('applocale')){
                                                         <li class="mr-2 pl-0 d-ipad"> <span class="mobile-search-btn"><i class="fa fa-search"
                                                                     aria-hidden="true"></i></span> </li>
                                                         <li class="onhover-div pl-0 shake-effect">
-                                                            @if($client_preference_detail)
-                                                                @if($client_preference_detail->cart_enable==1)
-                                                                <a class="btn btn-solid d-flex align-items-center " href="{{route('showCart')}}">
-                                                                    <span class="mr-1"><svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17H7.36729C6.86964 17 6.44772 16.6341 6.37735 16.1414M18 14H6.07143L4.5 3H2M9 5H21L19 11M11 19C11 20.1046 10.1046 21 9 21C7.89543 21 7 20.1046 7 19C7 17.8954 7.89543 17 9 17C10.1046 17 11 17.8954 11 19Z" stroke="#001A72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                    </svg>
-                                                                    </span>
 
-                                                                    <span id="cart_qty_span">
-                                                                    </span>
-                                                                </a>
-                                                                @endif
-                                                            @endif
-                                                            <script type="text/template" id="header_cart_template">
-                                                                <% _.each(cart_details.products, function(product, key){%> <% _.each(product.vendor_products, function(vendor_product, vp){%> <li id="cart_product_<%=vendor_product.id %>" data-qty="<%=vendor_product.quantity %>"> <a class='media' href='<%=show_cart_url %>'> <% if(vendor_product.pvariant.media_one){%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.pvariant.media_one.pimage.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_one.pimage.image.path.image_path %>"> <%}else if(vendor_product.pvariant.media_second && vendor_product.pvariant.media_second.image != null){%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.pvariant.media_second.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_second.image.path.image_path %>"> <%}else{%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.image_url %>"> <%}%> <div class='media-body'> <h4><%=vendor_product.product.translation_one ? vendor_product.product.translation_one.title : vendor_product.product.sku %></h4> <h4> <span><%=vendor_product.quantity %> x <%=Helper.formatPrice(vendor_product.pvariant.price) %></span> </h4> </div></a> <div class='close-circle'> <a href="javascript::void(0);" data-product="<%=vendor_product.id %>" class='remove-product'> <i class='fa fa-times' aria-hidden='true'></i> </a> </div></li><%}); %> <%}); %> <li><div class='total'><h5>{{ __('Subtotal') }}: <span id='totalCart'>{{ Session::get('currencySymbol') }}<%=Helper.formatPrice(cart_details.gross_amount) %></span></h5></div></li><li><div class='buttons'><a href="<%=show_cart_url %>" class='view-cart'>{{ __('View Cart') }}</a>
-                                                            </script>
-                                                            <ul class="show-div shopping-cart " id="header_cart_main_ul"></ul>
+                                                           
                                                         </li>
                                                         <li class="mobile-menu-btn d-none">
                                                             <div class="toggle-nav p-0 d-inline-block"><i class="fa fa-bars sidebar-bar"></i></div>
@@ -363,11 +348,7 @@ if(session()->has('applocale')){
                                                                 @endif
                                                             </div>
                                                         </li>
-                                                        <li class="onhover-div mobile-cart">
-                                                            <a href="{{ route('showCart') }}" style="position: relative"> <i class="ti-shopping-cart"></i> <span
-                                                                    class="cart_qty_cls" style="display:none"></span> </a>{{-- <span class="cart_qty_cls" style="display:none"></span> --}}
-                                                            <ul class="show-div shopping-cart"> </ul>
-                                                        </li>
+
                                                     </ul>
                                                 </div>
                                             </div>
@@ -377,17 +358,7 @@ if(session()->has('applocale')){
                                 </div>
                             </div>
                         </li>
-                        <li class="onhover-div pl-0 shake-effect">
-                                                @if($client_preference_detail) @if($client_preference_detail->cart_enable==1 && $client_preference_detail->p2p_check !=1)
-                                                <a class="btn btn-solid d-flex align-items-center p-0" href="{{route('showCart')}}">
-                                                    <span class="mr-1"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
 
-                                                    <!-- <span>{{__('Cart')}}•</span> -->
-                                                    <span id="cart_qty_span">Cart</span>
-                                                </a> @endif @endif
-                                                <script type="text/template" id="header_cart_template"> <% _.each(cart_details.products, function(product, key){%> <% _.each(product.vendor_products, function(vendor_product, vp){%> <li id="cart_product_<%=vendor_product.id %>" data-qty="<%=vendor_product.quantity %>"> <a class='media' href='<%=show_cart_url %>'> <% if(vendor_product.pvariant.media_one){%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.pvariant.media_one.pimage.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_one.pimage.image.path.image_path %>"> <%}else if(vendor_product.pvariant.media_second && vendor_product.pvariant.media_second.image != null){%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.pvariant.media_second.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_second.image.path.image_path %>"> <%}else{%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.image_url %>"> <%}%> <div class='media-body'> <h4><%=vendor_product.product.translation_one ? vendor_product.product.translation_one.title : vendor_product.product.sku %></h4> <h4> <span><%=vendor_product.quantity %> x <%=Helper.formatPrice(vendor_product.pvariant.price * vendor_product.pvariant.multiplier) %></span> </h4> </div></a> <div class='close-circle'> <a href="javascript::void(0);" data-product="<%=vendor_product.id %>" class='remove-product'> <i class='fa fa-times' aria-hidden='true'></i> </a> </div></li><%}); %> <%}); %> <li><div class='total'><h5>{{__('Subtotal')}}: <span id='totalCart'>{{Session::get('currencySymbol')}}<%=Helper.formatPrice(cart_details.gross_amount) %></span></h5></div></li><li><div class='buttons'><a href="<%=show_cart_url %>" class='view-cart'>{{__('View Cart')}}</a> </script>
-                                                <ul class="show-div shopping-cart " id="header_cart_main_ul"></ul>
-                                            </li>
                     </ul>
                 </div>
 
@@ -668,24 +639,7 @@ if(session()->has('applocale')){
                                                                 <li class="mr-2 pl-0 d-ipad"> <span class="mobile-search-btn"><i class="fa fa-search"
                                                                             aria-hidden="true"></i></span> </li>
                                                                 <li class="onhover-div pl-0 shake-effect">
-                                                                    @if($client_preference_detail)
-                                                                        @if($client_preference_detail->cart_enable==1)
-                                                                        <a class="btn btn-solid d-flex align-items-center " href="{{route('showCart')}}">
-                                                                            <span class="mr-1"><svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17H7.36729C6.86964 17 6.44772 16.6341 6.37735 16.1414M18 14H6.07143L4.5 3H2M9 5H21L19 11M11 19C11 20.1046 10.1046 21 9 21C7.89543 21 7 20.1046 7 19C7 17.8954 7.89543 17 9 17C10.1046 17 11 17.8954 11 19Z" stroke="#001A72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                            </svg>
-                                                                            </span>
-
-                                                                            <span id="cart_qty_span">
-                                                                            </span>
-                                                                        </a>
-                                                                        @endif
-                                                                    @endif
-                                                                    <script type="text/template" id="header_cart_template">
-                                                                        <% _.each(cart_details.products, function(product, key){%> <% _.each(product.vendor_products, function(vendor_product, vp){%> <li id="cart_product_<%=vendor_product.id %>" data-qty="<%=vendor_product.quantity %>"> <a class='media' href='<%=show_cart_url %>'> <% if(vendor_product.pvariant.media_one){%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.pvariant.media_one.pimage.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_one.pimage.image.path.image_path %>"> <%}else if(vendor_product.pvariant.media_second && vendor_product.pvariant.media_second.image != null){%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.pvariant.media_second.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_second.image.path.image_path %>"> <%}else{%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.image_url %>"> <%}%> <div class='media-body'> <h4><%=vendor_product.product.translation_one ? vendor_product.product.translation_one.title : vendor_product.product.sku %></h4> <h4> <span><%=vendor_product.quantity %> x <%=Helper.formatPrice(vendor_product.pvariant.price) %></span> </h4> </div></a> <div class='close-circle'> <a href="javascript::void(0);" data-product="<%=vendor_product.id %>" class='remove-product'> <i class='fa fa-times' aria-hidden='true'></i> </a> </div></li><%}); %> <%}); %> <li><div class='total'><h5>{{ __('Subtotal') }}: <span id='totalCart'>{{ Session::get('currencySymbol') }}<%=Helper.formatPrice(cart_details.gross_amount) %></span></h5></div></li><li><div class='buttons'><a href="<%=show_cart_url %>" class='view-cart'>{{ __('View Cart') }}</a>
-                                                                    </script>
-                                                                    <ul class="show-div shopping-cart " id="header_cart_main_ul"></ul>
-                                                                </li>
+                                                                    </li>
                                                                 <li class="mobile-menu-btn d-none">
                                                                     <div class="toggle-nav p-0 d-inline-block"><i class="fa fa-bars sidebar-bar"></i></div>
                                                                 </li>
@@ -738,11 +692,7 @@ if(session()->has('applocale')){
                                                                         @endif
                                                                     </div>
                                                                 </li>
-                                                                <li class="onhover-div mobile-cart">
-                                                                    <a href="{{ route('showCart') }}" style="position: relative"> <i class="ti-shopping-cart"></i> <span
-                                                                            class="cart_qty_cls" style="display:none"></span> </a>{{-- <span class="cart_qty_cls" style="display:none"></span> --}}
-                                                                    <ul class="show-div shopping-cart"> </ul>
-                                                                </li>
+                                                                
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -753,15 +703,7 @@ if(session()->has('applocale')){
                                     </div>
                                 </li>
                                 <li class="onhover-div pl-0 shake-effect">
-                                    @if($client_preference_detail) @if($client_preference_detail->cart_enable==1 && $client_preference_detail->p2p_check !=1)
-                                    <a class="btn btn-solid d-flex align-items-center p-0" href="{{route('showCart')}}">
-                                        <span class="mr-1"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-
-                                        <!-- <span>{{__('Cart')}}•</span> -->
-                                        <span id="cart_qty_span">Cart</span>
-                                    </a> @endif @endif
-                                    <script type="text/template" id="header_cart_template"> <% _.each(cart_details.products, function(product, key){%> <% _.each(product.vendor_products, function(vendor_product, vp){%> <li id="cart_product_<%=vendor_product.id %>" data-qty="<%=vendor_product.quantity %>"> <a class='media' href='<%=show_cart_url %>'> <% if(vendor_product.pvariant.media_one){%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.pvariant.media_one.pimage.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_one.pimage.image.path.image_path %>"> <%}else if(vendor_product.pvariant.media_second && vendor_product.pvariant.media_second.image != null){%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.pvariant.media_second.image.path.proxy_url %>200/200<%=vendor_product.pvariant.media_second.image.path.image_path %>"> <%}else{%> <img class='mr-2 blur-up lazyload' data-src="<%=vendor_product.image_url %>"> <%}%> <div class='media-body'> <h4><%=vendor_product.product.translation_one ? vendor_product.product.translation_one.title : vendor_product.product.sku %></h4> <h4> <span><%=vendor_product.quantity %> x <%=Helper.formatPrice(vendor_product.pvariant.price * vendor_product.pvariant.multiplier) %></span> </h4> </div></a> <div class='close-circle'> <a href="javascript::void(0);" data-product="<%=vendor_product.id %>" class='remove-product'> <i class='fa fa-times' aria-hidden='true'></i> </a> </div></li><%}); %> <%}); %> <li><div class='total'><h5>{{__('Subtotal')}}: <span id='totalCart'>{{Session::get('currencySymbol')}}<%=Helper.formatPrice(cart_details.gross_amount) %></span></h5></div></li><li><div class='buttons'><a href="<%=show_cart_url %>" class='view-cart'>{{__('View Cart')}}</a> </script>
-                                    <ul class="show-div shopping-cart " id="header_cart_main_ul"></ul>
+                                   
                                 </li>
                             </ul>
 
@@ -849,15 +791,7 @@ if(session()->has('applocale')){
 </div>
 <div class="al_mobile_menu al_new_mobile_header">
                 <div class="al_new_cart">
-                    @if($client_preference_detail->cart_enable == 1)
-                    <div class="onhover-dropdown_al onhover-div mobile-cart">
-                        <a href="{{route('showCart')}}" style="position: relative">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            <span class="cart_qty_cls" style="display:none"></span>
-                        </a>
-                        <ul class="show-div shopping-cart"></ul>
-                    </div>
-                    @endif
+
                 </div>
                 <a class="al_toggle-menu" href="javascript:void(0)">
                     <i></i>
@@ -898,16 +832,7 @@ if(session()->has('applocale')){
                         </li>
                         @endif
 
-                        @if($client_preference_detail->cart_enable == 1)
-                        <li class="onhover-dropdown_al mobile-wishlist_al mobile-cart">
-                            <a href="{{route('showCart')}}" style="position: relative">
-                            {{__('Viewcart')}}
-                                <span class="cart_qty_cls" style="display:none"></span>
-                            </a>
-                            <ul class="show-div shopping-cart"></ul>
-                        </li>
-                        @endif
-
+                        
                         @if($client_preference_detail->header_quick_link == 1)
                         @foreach($pages as $page)
                         @if(isset($page->primary->type_of_form) && ($page->primary->type_of_form == 2))

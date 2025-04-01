@@ -51,7 +51,7 @@ return [
   'ServiceTypes' => [
     // 'products_service'   => "Products Service", //
     // 'rental_service'     => "Rental Service",
-    // 'pick_drop_service'  => "Pick and Drop Service",
+    'pick_drop_service'  => "Pick and Drop Service",
     // 'on_demand_service'  => "Services",
     // 'laundry_service'    => "Laundry Service",
     // 'appointment_service'=> "Appointment Service",

@@ -420,11 +420,15 @@ Route::group(['middleware' => ['domain']], function () {
 	Route::get('/search-all/{keyword}', 'Front\SearchController@showSearchResults')->name('showSearchResults');
 	if (getClientCode() == "ad8e3a") {
 		Route::get('/', 'Front\UserhomeController@getLandingPage');
-	}else{
-		Route::get('/', 'Front\UserhomeController@index')->name('userHome');
+	} else {
+		Route::get('/', function () {
+			return redirect('/category/cabservice');
+		})->name('userHome');
 	}
-	Route::get('/order', 'Front\UserhomeController@index')->name('userHome');
-
+	// Route::get('/order', 'Front\UserhomeController@index')->name('userHome');
+	Route::get('/order', function () {
+		return redirect('/category/cabservice');
+	})->name('userHome');
 	Route::get('/setSessionIndex', 'Front\UserhomeController@setSessionIndex')->name('setSessionIndex');
 
 	Route::get('/updateLocation', 'Front\UserhomeController@setHyperlocalAddress')->name('updateLocation');

@@ -198,13 +198,7 @@ $preference = $client_preference_detail;
                         @endif
                     </ul>
                 </li>
-                @if($client_preference_detail->show_wishlist == 1)
-                <li class="mobile-wishlist d-inline d-sm-none al_iconsMb">
-                    <a href="{{route('user.wishlists')}}">
-                        <i class="fa fa-heart-o wishListCount" aria-hidden="true"></i>
-                    </a>
-                </li>
-                @endif
+
                 <li class="onhover-div al_mobile-search al_iconsMb">
                     <a href="javascript:void(0);" id="mobile_search_box_btn" onClick="$('.search-overlay').css('display','block');"><i class="ti-search"></i></a>
                     <div id="search-overlay" class="search-overlay">
@@ -221,16 +215,7 @@ $preference = $client_preference_detail;
                     </div>
                 </li>
 
-                @if($client_preference_detail->cart_enable == 1)
-                <li class="onhover-div mobile-cart al_iconsMb">
-                    <a href="{{route('showCart')}}" style="position: relative">
-                        <i class="ti-shopping-cart"></i>
-                        <span class="cart_qty_cls" style="display:none"></span>
-                    </a>
-                    <ul class="show-div shopping-cart">
-                    </ul>
-                </li>
-                @endif
+               
             </ul>
         </div>
     </div>

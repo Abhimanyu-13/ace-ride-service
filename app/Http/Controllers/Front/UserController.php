@@ -32,11 +32,11 @@ class UserController extends FrontController{
         $passbase_check = VerificationOption::where(['code' => 'passbase','status' => 1])->first();
         if(Session::has('user_type')){
             Session::forget('user_type');
-            $cart = Cart::latest()->limit(1)->get();
-            if(empty($cart[0]->user_id)){
-                $cart_detail = Cart::updateOrCreate(['id' => $cart[0]->id], ['user_id'=>Auth::user()->id]);
-                return redirect()->route('showCart');
-            }
+            // $cart = Cart::latest()->limit(1)->get();
+            // if(empty($cart[0]->user_id)){
+            //     $cart_detail = Cart::updateOrCreate(['id' => $cart[0]->id], ['user_id'=>Auth::user()->id]);
+            //     return redirect()->route('showCart');
+            // }
         }
         if($passbase_check && is_null($user->passbase_verification))
         {

@@ -38,6 +38,10 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.env') != 'local') {
             \URL::forceScheme('https');
         }
+            
+    if ($request->path() === 'order') {
+        return redirect('/category/cabservice');
+    }
        $this->connectDynamicDb($request);
         Paginator::useBootstrap();
         $social_media_details = '';
@@ -189,7 +193,7 @@ class AppServiceProvider extends ServiceProvider
                                 'strict' => false,
                                 'engine' => null
                             ];
-                        //    dd($default);
+                            // dd(env('DB_DATABASE'));
                             Config::set("database.connections.$database_name", $default);
                             Config::set("client_id", 1);
                             Config::set("client_connected", true);

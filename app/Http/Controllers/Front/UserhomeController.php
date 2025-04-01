@@ -293,158 +293,176 @@ class UserhomeController extends FrontController
         }
     }
 
+    // public function index(Request $request, $domain = '')
+    // {
+    //     // pr(Session::get('onDemandPricingSelected'));
+    //     try {
+    //         $home = array();
+    //         $vendor_ids = array();
+    //         if ($request->has('ref')) {
+    //             session(['referrer' => $request->query('ref')]);
+    //         }
+    //         $additionalPreference = getAdditionalPreference(['is_token_currency_enable', 'token_currency','is_long_term_service','is_admin_vendor_rating', 'is_service_product_price_from_dispatch','is_service_price_selection']);
+    //         $latitude = Session::get('latitude') ?? null;
+    //         $longitude = Session::get('longitude') ?? null;
+    //         $curId = Session::get('customerCurrency');
+    //         $langId = Session::get('customerLanguage');
+    //         $client_config = Session::get('client_config');
+    //         $selectedAddress = Session::get('selectedAddress');
+    //         $client_preferences = $this->client_preferences;
+    //         $_REQUEST['request_from'] = 1;
+
+    //         $navCategories = $this->categoryNav($langId);
+    //         Session::put('navCategories', $navCategories);
+    //         $vendor_type = $request->has('type') ? $request->type : Session::get('vendorType');
+
+    //         $count = 0;
+    //         if ($client_preferences) {
+    //             foreach (config('constants.VendorTypes') as $vendor_typ_key => $vendor_typ_value) {
+    //                 $clientVendorTypes = $vendor_typ_key.'_check';
+    //                 if ($client_preferences->$clientVendorTypes == 1) {
+    //                     $count++;
+    //                 }
+    //             }
+
+    //             if (empty($latitude) && empty($longitude)) {
+    //                 $latitude = $client_preferences->Default_latitude;
+    //                 $longitude = $client_preferences->Default_longitude;
+    //                 Session::put('latitude', $latitude);
+    //                 Session::put('longitude', $longitude);
+    //             }
+                
+
+    //         }
+
+    //         if (count($navCategories) > 0 && ($vendor_type == 'pick_drop') &&  ($count != 1)) {
+    //             $categoriesSlug = $navCategories[0]->slug;
+    //             return redirect()->route('categoryDetail', $categoriesSlug); 
+    //         }
+    //         $carbon_now = Carbon::now();
+
+
+
+
+    //         $home_page_labels = CabBookingLayout::where('is_active', 1)->web()->where('for_no_product_found_html', 0)->orderBy('order_by');
+
+
+    //         if (isset($langId) && !empty($langId)) {
+    //             $home_page_labels = $home_page_labels->with(['translations' => function ($q) use ($langId) {
+    //                 $q->where('language_id', $langId);
+    //             }]);
+    //         }
+
+    //         $home_page_labels = $home_page_labels->get();
+    //         // if nothing in enblead for home page then show all
+
+    //         //     $home_page_labels = HomePageLabel::with('translations')->where('is_active', 1)->orderBy('order_by')->get();
+    //         $request->request->add(['type' => Session::get('vendorType') ?? 'delivery','noTinJson' => 1]);
+    //         $set_template = WebStylingOption::where('web_styling_id', 1)->where('is_selected', 1)->first();
+
+    //         $CabBookingLayout = CabBookingLayout::web()->where('is_active', 1);
+    //         $home_page_pickup_labels   = clone $CabBookingLayout;
+    //         $for_no_product_found_html = clone $CabBookingLayout;
+    //         $enable_layout             = clone $CabBookingLayout;
+    //         $enable_layout = $enable_layout->orderBy('order_by', 'asc')->pluck('slug')->toArray();
+    //         $homePageData = $this->postHomePageDataV2($request, $set_template, $enable_layout, $additionalPreference);
+
+    //         $home_page_labels = $home_page_labels->map(function ($da) use ($homePageData, $navCategories) {
+    //             if ($da->slug != 'pickup_delivery' && $da->slug != 'dynamic_page') {
+    //                 $da[$da->slug] = $homePageData[$da->slug] ?? '';
+    //             }
+    //             if ($da->slug == 'nav_categories') {
+    //                 $da['nav_categories'] = $navCategories ?? '';
+    //             }
+    //             return $da;
+    //         });
+
+    //         $only_cab_booking = OnboardSetting::where('key_value', 'home_page_cab_booking')->count();
+    //         if ($only_cab_booking == 1) {
+    //             return Redirect::route('categoryDetail', 'cabservice');
+    //         }
+
+
+
+    //         $home_page_pickup_labels  = $home_page_pickup_labels->with('translations')->where('for_no_product_found_html', 0)->orderBy('order_by')->get();
+
+
+
+    //         $for_no_product_found_html = $for_no_product_found_html->with('translations')->where('for_no_product_found_html', 1)->orderBy('order_by')->get();
+
+    //         $categories = [];
+    //         if (isset($set_template)  && ($set_template->template_id == 8 || $set_template->template_id == 9)) {
+    //             $categories = Category::with('translation_one')->select('id', 'icon', 'slug', 'type_id', 'is_visible', 'status', 'is_core', 'vendor_id', 'can_add_products', 'parent_id')
+    //             ->where('id', '>', '1')
+
+    //             ->whereNotIn('type_id', [4, 5])
+    //             ->where(function ($q) {
+    //                 $q->whereNull('vendor_id');
+    //             })->orderBy('position', 'asc')
+    //             ->orderBy('id', 'asc')
+    //             ->where('status', 1)
+    //             ->orderBy('parent_id', 'asc')->get();
+    //         }
+
+
+
+    //         $view_page = "home-template-one";
+    //         if (isset($set_template)  && $set_template->template_id == 1) {
+    //             // $view_page = 'home-template-one';
+    //             $view_page = 'home-template-test-one';
+    //         } elseif (isset($set_template)  && $set_template->template_id == 2) {
+    //             // $view_page = "home-template-two";
+    //             $view_page = 'home-template-test-two';
+    //         } elseif (isset($set_template)  && $set_template->template_id == 3) {
+    //             // $view_page = "home-template-three";
+    //             $view_page = 'home-template-test-three';
+    //         } elseif (isset($set_template)  && $set_template->template_id == 4) {
+    //             // $view_page = "home-template-four";
+    //             $view_page = 'home-template-test-four';
+    //         } elseif (isset($set_template)  && $set_template->template_id == 5) {
+    //             $view_page = "home-template-five";
+    //         } elseif (isset($set_template)  && $set_template->template_id == 6) {
+    //             // $view_page = "home-template-six";
+    //             $view_page = "home-template-test-six";
+    //         } elseif (isset($set_template)  && $set_template->template_id == 8) {
+    //             // $view_page = "home-template-six";
+    //             $view_page = "home-template-test-eight";
+    //         } elseif (isset($set_template)  && $set_template->template_id == 9) {
+    //             $view_page = "home-template-test-nine";
+    //         }
+    //         $is_service_product_price_from_dispatch_forOnDemand = 0;
+
+    //         $getOnDemandPricingRule = getOnDemandPricingRule($vendor_type, Session::get('onDemandPricingSelected'), $additionalPreference);
+
+    //         $is_service_product_price_from_dispatch_forOnDemand = $getOnDemandPricingRule['is_price_from_freelancer'];
+    //         // if(($additionalPreference['is_service_product_price_from_dispatch'] == 1) && ( Session::get('vendorType') == 'on_demand')){
+    //         //     $is_service_product_price_from_dispatch_forOnDemand =1;
+    //         // }
+    //         $homeData = ['categories' => $categories,'home' => $home,  'count' => $count, 'for_no_product_found_html' => $for_no_product_found_html,'homePagePickupLabels' => $home_page_pickup_labels, 'homePageLabels' => $home_page_labels, 'clientPreferences' => $client_preferences, 'navCategories' => $navCategories, 'selectedAddress' => $selectedAddress, 'latitude' => $latitude, 'longitude' => $longitude,'enable_layout' => $enable_layout,'homePageData' => $homePageData ,'is_service_product_price_from_dispatch_forOnDemand' => $is_service_product_price_from_dispatch_forOnDemand];
+    //         // return view('frontend.'.$view_page)->with($homeData);
+    //         return view('frontend.map-page', compact('latitude', 'longitude'));
+    //     } catch (Exception $e) {
+    //         pr($e->getCode());
+    //         die;
+    //     }
+    // }
     public function index(Request $request, $domain = '')
     {
-        // pr(Session::get('onDemandPricingSelected'));
-        try {
-            $home = array();
-            $vendor_ids = array();
-            if ($request->has('ref')) {
-                session(['referrer' => $request->query('ref')]);
-            }
-            $additionalPreference = getAdditionalPreference(['is_token_currency_enable', 'token_currency','is_long_term_service','is_admin_vendor_rating', 'is_service_product_price_from_dispatch','is_service_price_selection']);
-            $latitude = Session::get('latitude') ?? null;
-            $longitude = Session::get('longitude') ?? null;
-            $curId = Session::get('customerCurrency');
-            $langId = Session::get('customerLanguage');
-            $client_config = Session::get('client_config');
-            $selectedAddress = Session::get('selectedAddress');
-            $client_preferences = $this->client_preferences;
-            $_REQUEST['request_from'] = 1;
-
-            $navCategories = $this->categoryNav($langId);
-            Session::put('navCategories', $navCategories);
-            $vendor_type = $request->has('type') ? $request->type : Session::get('vendorType');
-
-
-            $count = 0;
-            if ($client_preferences) {
-                foreach (config('constants.VendorTypes') as $vendor_typ_key => $vendor_typ_value) {
-                    $clientVendorTypes = $vendor_typ_key.'_check';
-                    if ($client_preferences->$clientVendorTypes == 1) {
-                        $count++;
-                    }
-                }
-
-                if (empty($latitude) && empty($longitude)) {
-                    $latitude = $client_preferences->Default_latitude;
-                    $longitude = $client_preferences->Default_longitude;
-                }
-
-            }
-
-            if (count($navCategories) > 0 && ($vendor_type == 'pick_drop') &&  ($count != 1)) {
-                $categoriesSlug = $navCategories[0]->slug;
-                return redirect()->route('categoryDetail', $categoriesSlug);
-            }
-            $carbon_now = Carbon::now();
-
-
-
-
-            $home_page_labels = CabBookingLayout::where('is_active', 1)->web()->where('for_no_product_found_html', 0)->orderBy('order_by');
-
-
-            if (isset($langId) && !empty($langId)) {
-                $home_page_labels = $home_page_labels->with(['translations' => function ($q) use ($langId) {
-                    $q->where('language_id', $langId);
-                }]);
-            }
-
-            $home_page_labels = $home_page_labels->get();
-            // if nothing in enblead for home page then show all
-
-            //     $home_page_labels = HomePageLabel::with('translations')->where('is_active', 1)->orderBy('order_by')->get();
-            $request->request->add(['type' => Session::get('vendorType') ?? 'delivery','noTinJson' => 1]);
-            $set_template = WebStylingOption::where('web_styling_id', 1)->where('is_selected', 1)->first();
-
-            $CabBookingLayout = CabBookingLayout::web()->where('is_active', 1);
-            $home_page_pickup_labels   = clone $CabBookingLayout;
-            $for_no_product_found_html = clone $CabBookingLayout;
-            $enable_layout             = clone $CabBookingLayout;
-            $enable_layout = $enable_layout->orderBy('order_by', 'asc')->pluck('slug')->toArray();
-            $homePageData = $this->postHomePageDataV2($request, $set_template, $enable_layout, $additionalPreference);
-
-            $home_page_labels = $home_page_labels->map(function ($da) use ($homePageData, $navCategories) {
-                if ($da->slug != 'pickup_delivery' && $da->slug != 'dynamic_page') {
-                    $da[$da->slug] = $homePageData[$da->slug] ?? '';
-                }
-                if ($da->slug == 'nav_categories') {
-                    $da['nav_categories'] = $navCategories ?? '';
-                }
-                return $da;
-            });
-
-            $only_cab_booking = OnboardSetting::where('key_value', 'home_page_cab_booking')->count();
-            if ($only_cab_booking == 1) {
-                return Redirect::route('categoryDetail', 'cabservice');
-            }
-
-
-
-            $home_page_pickup_labels  = $home_page_pickup_labels->with('translations')->where('for_no_product_found_html', 0)->orderBy('order_by')->get();
-
-
-
-            $for_no_product_found_html = $for_no_product_found_html->with('translations')->where('for_no_product_found_html', 1)->orderBy('order_by')->get();
-
-            $categories = [];
-            if (isset($set_template)  && ($set_template->template_id == 8 || $set_template->template_id == 9)) {
-                $categories = Category::with('translation_one')->select('id', 'icon', 'slug', 'type_id', 'is_visible', 'status', 'is_core', 'vendor_id', 'can_add_products', 'parent_id')
-                ->where('id', '>', '1')
-
-                ->whereNotIn('type_id', [4, 5])
-                ->where(function ($q) {
-                    $q->whereNull('vendor_id');
-                })->orderBy('position', 'asc')
-                ->orderBy('id', 'asc')
-                ->where('status', 1)
-                ->orderBy('parent_id', 'asc')->get();
-            }
-
-
-
-            $view_page = "home-template-one";
-            if (isset($set_template)  && $set_template->template_id == 1) {
-                // $view_page = 'home-template-one';
-                $view_page = 'home-template-test-one';
-            } elseif (isset($set_template)  && $set_template->template_id == 2) {
-                // $view_page = "home-template-two";
-                $view_page = 'home-template-test-two';
-            } elseif (isset($set_template)  && $set_template->template_id == 3) {
-                // $view_page = "home-template-three";
-                $view_page = 'home-template-test-three';
-            } elseif (isset($set_template)  && $set_template->template_id == 4) {
-                // $view_page = "home-template-four";
-                $view_page = 'home-template-test-four';
-            } elseif (isset($set_template)  && $set_template->template_id == 5) {
-                $view_page = "home-template-five";
-            } elseif (isset($set_template)  && $set_template->template_id == 6) {
-                // $view_page = "home-template-six";
-                $view_page = "home-template-test-six";
-            } elseif (isset($set_template)  && $set_template->template_id == 8) {
-                // $view_page = "home-template-six";
-                $view_page = "home-template-test-eight";
-            } elseif (isset($set_template)  && $set_template->template_id == 9) {
-                $view_page = "home-template-test-nine";
-            }
-            $is_service_product_price_from_dispatch_forOnDemand = 0;
-
-            $getOnDemandPricingRule = getOnDemandPricingRule($vendor_type, Session::get('onDemandPricingSelected'), $additionalPreference);
-
-            $is_service_product_price_from_dispatch_forOnDemand = $getOnDemandPricingRule['is_price_from_freelancer'];
-            // if(($additionalPreference['is_service_product_price_from_dispatch'] == 1) && ( Session::get('vendorType') == 'on_demand')){
-            //     $is_service_product_price_from_dispatch_forOnDemand =1;
-            // }
-            $homeData = ['categories' => $categories,'home' => $home,  'count' => $count, 'for_no_product_found_html' => $for_no_product_found_html,'homePagePickupLabels' => $home_page_pickup_labels, 'homePageLabels' => $home_page_labels, 'clientPreferences' => $client_preferences, 'navCategories' => $navCategories, 'selectedAddress' => $selectedAddress, 'latitude' => $latitude, 'longitude' => $longitude,'enable_layout' => $enable_layout,'homePageData' => $homePageData ,'is_service_product_price_from_dispatch_forOnDemand' => $is_service_product_price_from_dispatch_forOnDemand];
-            return view('frontend.'.$view_page)->with($homeData);
-
-        } catch (Exception $e) {
-            pr($e->getCode());
-            die;
+        $latitude = Session::get('latitude') ?? null;
+        $longitude = Session::get('longitude') ?? null;
+        $client_preferences = $this->client_preferences;
+    
+        // Set default latitude and longitude if not already set
+        if (empty($latitude) || empty($longitude)) {
+            $latitude = $client_preferences->Default_latitude ?? 0; // Replace with actual default latitude
+            $longitude = $client_preferences->Default_longitude ?? 0; // Replace with actual default longitude
+            Session::put('latitude', $latitude);
+            Session::put('longitude', $longitude);
         }
+    
+        // Pass the latitude and longitude to the view
+        return view('frontend.booking.index', compact('latitude', 'longitude'));
     }
-
 
     /**
      * setHyperlocalAddress
