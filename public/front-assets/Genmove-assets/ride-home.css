@@ -1,0 +1,992 @@
+.homepage-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.homepage-form {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px 28px;
+    background-image: url("https://res.cloudinary.com/dr8c9t2zv/image/upload/v1747115819/featured_background_ride_yrlr8a.png");
+}
+
+.homepage-map {
+    flex: 1;
+    min-width: 0;
+    height: 100vh;
+    padding: 40px;
+    border-radius: 20px;
+    border-color: #fff;
+}
+
+.form-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.form-subtitle {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input,
+select,
+button {
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+button {
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.option {
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+input.alCheckMark[type="radio"] {
+    display: none;
+}
+
+.alRiderImg {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    line-height: 45px;
+    color: #fff;
+    border: 3px solid transparent;
+    font-size: 24px;
+    text-transform: capitalize;
+}
+
+.alRiderName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+}
+
+.alCheckMark:checked ~ .option .alRiderImg {
+    border: 4px solid #fff;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 30%);
+    text-transform: capitalize;
+}
+
+.alCheckMark:checked ~ .option span.alCloseBtn {
+    display: none;
+}
+
+.alAddRiderSecOuter {
+    max-height: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#alTaxiBookingWrapper .vehical-container {
+    max-height: 200px;
+}
+
+#alTaxiBookingWrapper .location-box {
+    padding: 10px 24px;
+}
+
+#alTaxiBookingWrapper .location-inputs .title-24 {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+#alTaxiBookingWrapper .scheduled-ride {
+    padding: 10px;
+}
+
+.alAddRiderSecOuter button.btn.rounded {
+    border: 1px solid;
+}
+
+span.alCloseBtn {
+    position: absolute;
+    background-color: #fff;
+    height: 15px;
+    width: 15px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 15px;
+    color: #000;
+    border-radius: 30px;
+    right: 28px;
+    margin: 0 auto;
+    top: -3px;
+    box-shadow: 0 0 5px rgb(0 0 0 / 30%);
+    z-index: 99;
+    cursor: pointer;
+    display: none;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.alHoverRiderBox:hover span.alCloseBtn {
+    display: block;
+}
+
+.input-hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px grey;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--theme-deafult);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}
+
+.alRiderRadioBox label {
+    border: 2px solid transparent;
+    position: relative;
+}
+
+.alRiderRadioBox label:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    background-color: var(--theme-deafult);
+    height: 25px;
+    width: 25px;
+    z-index: 1;
+    border-radius: 0 0 50px 0;
+    display: none;
+}
+
+.alRiderRadioBox label:after {
+    position: absolute;
+    content: "";
+    left: 7px;
+    top: 4px;
+    width: 6px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 2;
+    display: none;
+}
+
+.alRiderRadioBox input[type="radio"]:checked + label {
+    border: 2px solid var(--theme-deafult);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.alRiderRadioBox input[type="radio"]:checked + label:after,
+.alRiderRadioBox input[type="radio"]:checked + label:before {
+    display: block;
+}
+
+.alFullMapForm {
+    max-width: 450px !important;
+    margin-left: 15px !important;
+    top: 50px;
+    left: 0;
+}
+
+body .alFullMapForm .scheduled-footer .btn {
+    font-size: 14px !important;
+    padding: 0 !important;
+    line-height: 3;
+    min-height: auto;
+    border: 1px solid var(--theme-deafult);
+}
+
+.booking-experienceNew {
+    background-color: #fff;
+    left: 0;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.slick_bid_ride .slick-items {
+    width: 290%;
+    margin: 0px auto;
+}
+
+.slick_bid_ride .slick-slide {
+    margin: 6px;
+    border: 1px solid#eee;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.slick_bid_ride .slick-slide img {
+    width: 100%;
+    border-radius: 11px;
+}
+
+.slick_bid_ride .slick-slide a:hover {
+    border-radius: 10px;
+    border: 1px solid #6b6f74;
+}
+
+.slick_bid_ride .slick-slide .active {
+    border-radius: 10px;
+    border: 1px solid #6b6f74;
+}
+
+.slick_bid_ride .slick-slide h5 {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.slider .slick-prev:before,
+.slick-next:before {
+    font-size: 30px;
+    line-height: 1;
+    opacity: 0.75;
+    color: #000;
+}
+
+.cab-bg {
+    background: #eee;
+    padding: 2px 0px;
+}
+
+.recommend-column p {
+    display: inline-block;
+}
+
+.recommend-column p {
+    font-size: 20px;
+}
+
+.recommendated_price {
+    font-size: 13px;
+    padding: 2px 9px;
+    border-radius: 2px;
+}
+
+.recommendated_price span {
+    font-size: 12px;
+}
+
+.slick_bid_ride .slick-prev.slick-arrow {
+    left: 0px;
+}
+
+.slick_bid_ride .slick-next.slick-arrow {
+    right: 5px;
+}
+
+.slick_bid_ride .slick-prev:before {
+    font-size: 18px;
+}
+
+.slick_bid_ride .slick-next:before {
+    font-size: 18px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.bid-btnleft {
+    width: 100%;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.driver_info img {
+    width: 126px;
+    margin-right: 20px;
+}
+
+.driver_info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.driver_info .user-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.driver_info .user-info p {
+    font-size: 14px;
+}
+
+.driver_info .user-info p span {
+    float: right;
+}
+
+.driver_info .user-info button {
+    border: none;
+    padding: 6px 20px;
+}
+
+.driver_info .user-info button:hover {
+    background-color: #51089b;
+    color: #fff !important;
+}
+
+.text-loader {
+    text-align: center;
+    padding: 40px 0px;
+    font-size: 14px;
+}
+
+.text-loader i {
+    font-size: 16px !important;
+}
+
+.service-info-item {
+    line-height: 1.42857143;
+    color: #333;
+    -webkit-text-size-adjust: 100%;
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    font-family: "Noto Sans", sans-serif !important;
+    padding: 26px 10px 10px 0px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.service-info-item-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.service-info-item-title-container {
+    margin-left: 10px;
+}
+
+.service-info-item-title {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.service-info-item-title-underline {
+    line-height: 1.42857143;
+    color: #333;
+    -webkit-text-size-adjust: 100%;
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    font-family: "Noto Sans", sans-serif !important;
+    background: #ffca20;
+    width: 76px;
+    height: 2px;
+    margin-top: 5px;
+}
+
+.service-info-container {
+    /* background-color: #fff; */
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.service-info-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+    font-size: 36px;
+    color: #51089b;
+    margin-bottom: 16px;
+}
+
+.service-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.quick-ride-section {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quick-ride-content {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 12px;
+    max-width: 1200px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.quick-ride-text {
+    flex: 1 1 50%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.quick-ride-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1a202a;
+    margin-bottom: 10px;
+}
+
+.quick-ride-underline {
+    width: 60px;
+    height: 3px;
+    background-color: var(--theme-deafult);
+    margin-bottom: 20px;
+}
+
+.quick-ride-description {
+    font-size: 16px;
+    color: #1a202a;
+    line-height: 1.6;
+}
+
+.quick-ride-image {
+    flex: 1 1 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f7f9;
+}
+
+.quick-ride-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0 12px 12px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .quick-ride-content {
+        flex-direction: column;
+    }
+
+    .quick-ride-image img {
+        border-radius: 0 0 12px 12px;
+    }
+    .funfact-style-one {
+        padding: 40px 15px;
+    }
+}
+
+/* Core responsive layout */
+.homepage-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    gap: 20px;
+}
+
+.homepage-form,
+.homepage-map {
+    flex: 1 1 100%;
+    max-width: 100%;
+}
+
+/* Map full width on small screens */
+.homepage-map #booking-map {
+    height: 300px;
+    border-radius: 10px;
+}
+
+/* Show two columns on larger screens */
+@media (min-width: 768px) {
+    .homepage-form,
+    .homepage-map {
+        flex: 1 1 48%;
+        max-width: 48%;
+    }
+
+    .homepage-map #booking-map {
+        height: 100vh;
+    }
+}
+
+/* Responsive location input styling */
+.location-search {
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.location-search input {
+    width: 100%;
+    font-size: 16px;
+}
+
+/* Adjust scheduled ride list */
+.scheduled-ride-list {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+/* Ride options spacing */
+.tip_radio_controls_book_friend,
+.pool_radio_controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pool_radio_controls .item,
+.tip_radio_controls_book_friend label {
+    flex: 1 1 auto;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* Adjust location list */
+.location-list a.select-location {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* Responsive rider section */
+.alRiderImgBox .col-3 {
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+@media (min-width: 576px) {
+    .alRiderImgBox .col-3 {
+        width: 25%;
+    }
+}
+
+/* Wallet warning */
+.row {
+    flex-wrap: wrap;
+}
+
+.row .col-md-7,
+.row .col-md-5 {
+    flex: 1 1 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    .row .col-md-7 {
+        flex: 1 1 70%;
+        text-align: left;
+    }
+
+    .row .col-md-5 {
+        flex: 1 1 30%;
+        text-align: right;
+    }
+}
+
+/* Button styles */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+/* Table responsive adjustments */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.cab-button {
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Hide unused elements cleanly on small screens */
+[style*="display:none !important"] {
+    display: none !important;
+}
+
+.single-funfact-one {
+    display: block;
+    margin-bottom: 30px;
+    padding: 60px;
+    height: 280px;
+    width: 280px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+.hvr-float-shadow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.block-title {
+    margin-bottom: 40px;
+}
+
+.block-title p {
+    font-size: 16px;
+    color: #777;
+    margin: 24px;
+}
+
+.block-title h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1a202a;
+}
+
+.single-funfact-one h3 {
+    margin: 0;
+    color: #111111;
+    font-size: 60px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.04em;
+    line-height: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.single-funfact-one .hvr-float-shadow {
+    margin: 0px 0px 30px;
+    padding: 55.5px 0px;
+    background: #fff;
+    color: #717171;
+}
+.counter {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+    color: #333;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animate on scroll utility */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Button hover + click */
+button {
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background: #222;
+    transform: scale(1.02);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Card hover animation */
+.service-card {
+    border: var(--theme-deafult) solid 1px; 
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    animation: pulse 0.6s ease;
+}
+
+/* Image hover pulse */
+.quick-ride-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0 12px 12px 0;
+    transition: transform 0.3s ease;
+}
+
+.quick-ride-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Input focus */
+input,
+select,
+button {
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #51089b;
+    box-shadow: 0 0 5px rgba(81, 8, 155, 0.5);
+    outline: none;
+}
+
+/* Homepage container animation */
+.homepage-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    gap: 20px;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Hover effect for clickable cards */
+.slick_bid_ride .slick-slide {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slick_bid_ride .slick-slide:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Close button hover */
+span.alCloseBtn:hover {
+    transform: rotate(90deg);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Rider image pulse */
+.alRiderImg:hover {
+    animation: pulse 0.5s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Add fade-in to titles and sections */
+.form-title,
+.form-subtitle,
+.service-info-title,
+.quick-ride-title {
+    animation: fadeInUp 1s ease;
+}
+
+/* Driver info hover */
+.driver_info:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+/* Fade effect on loader */
+.text-loader {
+    animation: fadeInUp 1s ease;
+}
+
+.text-loader i {
+    animation: pulse 1.2s infinite ease-in-out;
+}
+
+/* Add transform to icons */
+.service-icon {
+    transition: transform 0.3s ease;
+}
+
+.service-icon:hover {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Animate funfacts when they come into view */
+.funfact-style-one {
+    padding: 60px;
+}
+
+.single-funfact-one.visible {
+    animation: fadeInUp 0.8s ease forwards;
+    border: var(--theme-deafult) solid 1px;
+    border-radius: 12px;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.single-funfact-one i {
+    font-size: 40px;
+    color: var(--theme-deafult); /* Use your main accent color */
+    margin-bottom: 10px;
+}
+
+/* Hover effect */
+.single-funfact-one:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Counter styling */
+.single-funfact-one h3.counter {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.single-funfact-one p {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
+.single-funfact-one .icon{
+    display: flex;
+    justify-content: center;
+}

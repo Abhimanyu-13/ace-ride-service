@@ -421,9 +421,10 @@ Route::group(['middleware' => ['domain']], function () {
 	if (getClientCode() == "ad8e3a") {
 		Route::get('/', 'Front\UserhomeController@getLandingPage');
 	} else {
-		Route::get('/', function () {
-			return redirect('/category/cabservice');
-		})->name('userHome');
+		// Route::get('/', function () {
+		// 	return redirect('/category/cabservice');
+		// })->name('userHome');
+		Route::get('/', 'Front\UserhomeController@getLandingPage');
 	}
 	// Route::get('/order', 'Front\UserhomeController@index')->name('userHome');
 	Route::get('/order', function () {

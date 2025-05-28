@@ -67,7 +67,7 @@ class UserhomeController extends FrontController
 
     public function getLandingPage()
     {
-        return view('frontend.landing-pages.khanakhazana');
+        return view('frontend.landing-pages.GenMove');
     }
 
     public function getConfig()
