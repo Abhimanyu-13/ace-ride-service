@@ -821,7 +821,7 @@ button {
 }
 
 button:hover {
-    background: #222;
+    /* background: #222; */
     transform: scale(1.02);
 }
 
