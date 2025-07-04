@@ -6,7 +6,7 @@
             </a>
         </li>
         
-        @if((($client_preference_detail->business_type != 'taxi') && (($client_preference_detail->is_hyperlocal==1) || ($vendor->show_slot!=1))) || (($client_preference_detail->business_type == 'taxi') && ($client_preference_detail->pickup_delivery_service_area == 1)))
+        @if((($client_preference_detail->business_type != 'taxi') && (($client_preference_detail->is_hyperlocal==1) || ($vendor->show_slot!=1))) || (($client_preference_detail->business_type == 'taxi') && ($client_preference_detail->pickup_delivery_service_area == 1))  || (($client_preference_detail->business_type != 'taxi') && ($vendor->dine_in == 1)))
         <li class="nav-item">
             <a href="{{ route('vendor.show', $vendor->id) }}" aria-expanded="false"
                 class="nav-link {{ $tab == 'configuration' ? 'active' : '' }} {{ $vendor->status == 1 ? '' : 'disabled' }}">

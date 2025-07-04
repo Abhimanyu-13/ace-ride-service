@@ -2306,12 +2306,6 @@ footer .news_letter form .note {
 }
 
 /* footer heading and text colors variable */
-footer h2,
-footer h5,
-footer p,
-footer a {
-    color: var(--black);
-}
 
 footer a:hover {
     color: var(--white);

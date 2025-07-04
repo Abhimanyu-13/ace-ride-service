@@ -1042,7 +1042,6 @@ class OrderController extends BaseController
      */
     public function changeStatus(Request $request, $domain = '')
     {
-      
         $orderPlaced = true;
         $orderPlacedNo = '';
         $productIds = $request->productIds??[];
@@ -1096,50 +1095,52 @@ class OrderController extends BaseController
                         $vendor_order_product_status->save();
                     }
                 }
-               
+                $luxury_option_id = $orderData->LuxuryOption ? $orderData->LuxuryOption->luxury_option_id : 1;
                 if ($request->status_option_id == 2) {
-                    //Check Order delivery type
+                    if($luxury_option_id && $luxury_option_id != 3){
+                         //Check Order delivery type
                     
-                    if ($orderData->shipping_delivery_type == 'D') {
-                        //Create Shipping request for dispatcher
-                        if($orderData->orderDetail->is_long_term ==1){
-                            $order_dispatch = $this->checkIfanyServiceProductLastMileon($request);
+                        if ($orderData->shipping_delivery_type == 'D') {
+                            //Create Shipping request for dispatcher
+                            if($orderData->orderDetail->is_long_term ==1){
+                                $order_dispatch = $this->checkIfanyServiceProductLastMileon($request);
 
-                        }
-                        else if($orderData->orderDetail->recurring_booking_type ==1){
-                            $order_dispatch = $this->checkIfIsProductRecurringLastMileon($request);
-                        }
-                        else{
-                            $order_dispatch = $this->checkIfanyProductLastMileon($request);
-                        }
-                        if ($order_dispatch && $order_dispatch == 1){
+                            }
+                            else if($orderData->orderDetail->recurring_booking_type ==1){
+                                $order_dispatch = $this->checkIfIsProductRecurringLastMileon($request);
+                            }
+                            else{
+                                $order_dispatch = $this->checkIfanyProductLastMileon($request);
+                            }
+                            if ($order_dispatch && $order_dispatch == 1){
 
-                            $stats = $this->insertInVendorOrderDispatchStatus($request);
-                            $orderPlaced = true;
+                                $stats = $this->insertInVendorOrderDispatchStatus($request);
+                                $orderPlaced = true;
+                            }
+                        } elseif ($orderData->shipping_delivery_type == 'L') {
+                            //Create Shipping place order request for Lalamove
+                            //$orderPlaced = $this->placeOrderRequestlalamove($request);
+
+                        } elseif ($orderData->shipping_delivery_type == 'K') {
+                            //Create Shipping place order request for Kwik
+                            $orderPlaced = $this->placeOrderRequestKwikApi($request);
+
+                        } elseif ($orderData->shipping_delivery_type == 'SR') {
+                            //Create Shipping place order request for Shiprocket
+                            $orderPlaced = $this->placeOrderRequestShiprocket($request);
+                        } elseif ($orderData->shipping_delivery_type == 'DU') {
+                            //Create Shipping place order request for Dunzo
+                            $orderPlaced = $this->placeOrderRequestDunzo($request);
+                        } elseif ($orderData->shipping_delivery_type == 'M') {
+                            //Create Shipping place order request for Ahoy Masa
+                            $orderPlaced = $this->placeOrderRequestAhoy($request);
+                        } elseif ($orderData->shipping_delivery_type == 'SH') {
+                            //Create Shipping place order request for Shippo Masa
+                            $orderPlaced = $this->placeOrderRequestShippo($request);
+                        }elseif ($orderData->shipping_delivery_type == 'RO') {
+                            //Create Roadies place order request for Roadies
+                            $orderPlaced = $this->placeOrderRequestRoadies($request);
                         }
-                    } elseif ($orderData->shipping_delivery_type == 'L') {
-                        //Create Shipping place order request for Lalamove
-                        //$orderPlaced = $this->placeOrderRequestlalamove($request);
-
-                    } elseif ($orderData->shipping_delivery_type == 'K') {
-                        //Create Shipping place order request for Kwik
-                        $orderPlaced = $this->placeOrderRequestKwikApi($request);
-
-                    } elseif ($orderData->shipping_delivery_type == 'SR') {
-                        //Create Shipping place order request for Shiprocket
-                        $orderPlaced = $this->placeOrderRequestShiprocket($request);
-                    } elseif ($orderData->shipping_delivery_type == 'DU') {
-                        //Create Shipping place order request for Dunzo
-                        $orderPlaced = $this->placeOrderRequestDunzo($request);
-                    } elseif ($orderData->shipping_delivery_type == 'M') {
-                        //Create Shipping place order request for Ahoy Masa
-                        $orderPlaced = $this->placeOrderRequestAhoy($request);
-                    } elseif ($orderData->shipping_delivery_type == 'SH') {
-                        //Create Shipping place order request for Shippo Masa
-                        $orderPlaced = $this->placeOrderRequestShippo($request);
-                    }elseif ($orderData->shipping_delivery_type == 'RO') {
-                        //Create Roadies place order request for Roadies
-                        $orderPlaced = $this->placeOrderRequestRoadies($request);
                     }
                     $orderData->accepted_by = Auth::user()->id;
                     $orderData->save();
@@ -1252,10 +1253,12 @@ class OrderController extends BaseController
                 // $this->sendSuccessNotification(Auth::user()->id, $request->vendor_id);
                 $this->sendStatusChangePushNotificationCustomer([$currentOrderStatus->user_id], $orderData, $request->status_option_id);
                 $customer = User::find($orderData->user_id);
-                if(getAdditionalPreference(['is_tracking_url'])['is_tracking_url'] == 1){
-                     $this->sendTrackingUrlSMS($orderData);
+                if($request->status_option_id != 3){
+                    if(getAdditionalPreference(['is_tracking_url'])['is_tracking_url'] == 1){
+                        $this->sendTrackingUrlSMS($orderData);
+                   }
                 }
-
+                
                 return response()->json([
                     'status' => 'success',
                     'created_date' => convertDateTimeInTimeZone($vendor_order_status->created_at, $timezone, 'l, F d, Y, H:i A'),

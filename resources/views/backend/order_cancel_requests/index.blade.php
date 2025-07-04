@@ -193,7 +193,7 @@
             <span> <%= name %> </span>
             <small><%= email %></small>
         </p>
-        <sup class="">&#128473;</sup>
+        <!-- <sup class="">&#128473;</sup> -->
     </li>
 </script>
 @endsection

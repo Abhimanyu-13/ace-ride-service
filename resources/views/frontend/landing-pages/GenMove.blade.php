@@ -64,9 +64,8 @@
 
     /* Header Styling */
     .genmove-header {
-        background: linear-gradient(145deg, #ddd, #261515);
-        color: #fff;
-        padding: 0.8rem 0;
+        color: black;
+        /* padding: 0.8rem 0; */
         position: fixed;
         top: 0;
         left: 0;
@@ -108,7 +107,7 @@
 
     .nav-links li a {
         text-decoration: none;
-        color: #f4f4f4;
+        /* color: #f4f4f4; */
         font-weight: 500;
         font-size: 1.1rem;
         padding: 0.5rem 1rem;

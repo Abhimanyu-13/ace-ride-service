@@ -39,9 +39,9 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
             
-    if ($request->path() === 'order') {
-        return redirect('/category/cabservice');
-    }
+    // if ($request->path() === 'order') {
+    //     return redirect('/category/cabservice');
+    // }
        $this->connectDynamicDb($request);
         Paginator::useBootstrap();
         $social_media_details = '';

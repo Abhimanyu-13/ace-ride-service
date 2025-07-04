@@ -32,21 +32,34 @@
    });
    var card = '';
    var stripe = '';
-   function stripeInitialize() {
+   function stripeInitialize2() {
+    console.log('stripeInitialize2');
+    
         stripe = Stripe(stripe_publishable_key);
         var elements = stripe.elements();
         var style = {
-            base: { fontSize: '16px', color: '#32325d', borderColor: '#ced4da' },
+        base: {
+            color: '#32325d',
+            fontSize: '16px',
+            fontFamily: 'Arial, sans-serif',
+            '::placeholder': {
+            color: '#aab7c4'
+            }
+        },
+        invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
+        }
         };
         card = elements.create('card', { hidePostalCode: true, style: style });
-        card.mount('#stripe-card-element');
+        card.mount('#stripe-card-element2');
     }
    $(document).on("click", ".select_cab_payment_method",function() {
        var payment_method = $(this).attr('data-payment_method');
        console.log({payment_method});
             if (payment_method == 4) {
-                stripeInitialize();
-                $("#cab_payment_method_form .stripe_element_wrapper").removeClass('d-none');
+                stripeInitialize2();
+                // $("#cab_payment_method_form .stripe_element_wrapper").removeClass('d-none');
             }else if (payment_method == 49) {
                  $("#cab_payment_method_form .plugnpay_element_wrapper").removeClass('d-none');
             }
@@ -118,13 +131,14 @@
         else{
             //hide model
              $('#stripe_card_error').html('');
-             if (type == 'bid') {
-                $("#payment_modal_bid").modal('toggle');
-             }else{
-                $("#payment_modal").modal('toggle');
-             }
-
         }
+
+        if (type == 'bid') {
+            $("#payment_modal_bid").modal('toggle');
+        }else{
+            $("#payment_modal").modal('toggle');
+        }
+
     });
 
    function setOrderDetailsPage() {
