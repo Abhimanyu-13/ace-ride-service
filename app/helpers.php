@@ -2100,7 +2100,7 @@ if (!function_exists('getOnDemandPricingRule')) {
                         $return['is_price_from_freelancer'] =0;
                     }
                 }
-            }
+            }   
             return $return;
     }
 }

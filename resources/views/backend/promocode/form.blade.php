@@ -76,7 +76,12 @@
                         $minDate = Date('Y-m-d');
                         @endphp
                         {!! Form::label('expiry_date', __('Expiry Date'),['class' => 'control-label']) !!}
-                        {!! Form::text('expiry_date', $promo->expiry_date, ['class' => 'form-control downside datetime-datepicker', 'id' => 'start-datepicker', 'min' => $minDate]) !!}
+                        {!! Form::text('expiry_date', $promo->expiry_date, [
+                            'class' => 'form-control downside datetime-datepicker',
+                            'id' => 'start-datepicker',
+                            'min' => $minDate,
+                            'style' => 'background-color:#232b34 !important;color:#fff !important;border-color:#43bee1 !important;'
+                        ]) !!}
                         <span class="invalid-feedback" role="alert">
                             <input type="hidden" name="promo_id" value="{{isset($promo->id) ? $promo->id : ''}}">
                             <strong></strong>
@@ -214,3 +219,28 @@
         </div>
     </div>
 </div>
+<style>
+#start-datepicker::placeholder {
+    color: #b0b8c1 !important;
+    opacity: 1 !important;
+}
+/* Force Flatpickr time picker fields to be readable in dark mode */
+body.dark .flatpickr-calendar,
+body.dark .flatpickr-time,
+body.dark .flatpickr-time input,
+body.dark .flatpickr-am-pm,
+body.dark .flatpickr-time-separator {
+    background: #232b34 !important;
+    color: #fff !important;
+    border-color: #43bee1 !important;
+}
+
+body.dark .flatpickr-time input,
+body.dark .flatpickr-am-pm {
+    color: #fff !important;
+}
+
+body.dark .flatpickr-time input::placeholder {
+    color: #b0b8c1 !important;
+}
+</style>

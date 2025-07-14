@@ -2,6 +2,65 @@
 @section('css')
 <link href="{{asset('assets/libs/dropzone/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/libs/dropify/dropify.min.css')}}" rel="stylesheet" type="text/css" />
+<style>
+/* Dark mode datetime picker styling */
+.datetime-datepicker {
+    background-color: #3b4651 !important;
+    border-color: #424e5a !important;
+    color: #94a0ad !important;
+}
+
+.datetime-datepicker:focus {
+    background-color: #3b4651 !important;
+    border-color: #43bee1 !important;
+    color: #94a0ad !important;
+    box-shadow: 0 0 0 0.2rem rgba(67, 190, 225, 0.25) !important;
+}
+
+.datetime-datepicker::placeholder {
+    color: #5d7186 !important;
+}
+
+.datetime-datepicker::-webkit-input-placeholder {
+    color: #5d7186 !important;
+}
+
+.datetime-datepicker::-moz-placeholder {
+    color: #5d7186 !important;
+}
+
+.datetime-datepicker:-ms-input-placeholder {
+    color: #5d7186 !important;
+}
+
+.datetime-datepicker:-moz-placeholder {
+    color: #5d7186 !important;
+}
+
+/* Modal-specific styling */
+.modal .datetime-datepicker,
+#add-promo-form .datetime-datepicker,
+#edit-promo-form .datetime-datepicker {
+    background-color: #3b4651 !important;
+    border-color: #424e5a !important;
+    color: #94a0ad !important;
+}
+
+.modal .datetime-datepicker:focus,
+#add-promo-form .datetime-datepicker:focus,
+#edit-promo-form .datetime-datepicker:focus {
+    background-color: #3b4651 !important;
+    border-color: #43bee1 !important;
+    color: #94a0ad !important;
+    box-shadow: 0 0 0 0.2rem rgba(67, 190, 225, 0.25) !important;
+}
+
+.modal .datetime-datepicker::placeholder,
+#add-promo-form .datetime-datepicker::placeholder,
+#edit-promo-form .datetime-datepicker::placeholder {
+    color: #5d7186 !important;
+}
+</style>
 @endsection
 @section('content')
 @php
